@@ -62,7 +62,7 @@ function CodeEditor() {
   async function checkStatusAndShowOutput() {
     try {
       const { data }: any = await axios.get(
-        `https://coding-machine-api.herokuapp.com/check-status/${executionId}`
+        `https://coding-machine-api.cyclic.app/check-status/${executionId}`
       );
       if (data.data !== "completed") {
         setTimeout(() => {
@@ -71,7 +71,7 @@ function CodeEditor() {
         }, 500);
       } else {
         const { data } = await axios.get(
-          `https://coding-machine-api.herokuapp.com/result/${executionId}`
+          `https://coding-machine-api.cyclic.app/result/${executionId}`
         );
         setOutput(data.data);
         setCheckCodeStatus(false);
@@ -143,7 +143,7 @@ function CodeEditor() {
         .then(() => {})
         .catch(async () => {
           const { data } = await axios.post(
-            "https://coding-machine-api.herokuapp.com/submit",
+            "https://coding-machine-api.cyclic.app/submit",
             {
               code,
               language: selectLanguage,
