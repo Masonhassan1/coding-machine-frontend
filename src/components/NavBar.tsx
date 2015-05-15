@@ -34,7 +34,9 @@ export default function NavBar() {
                     </button>
 
                     <a
-                      href={"www.google.com"}
+                      href={
+                        "https://theuniquecoder.hashnode.dev/coding-machine-a-online-editor-to-write-programs-and-to-run-it-part-1"
+                      }
                       target="_blank"
                       rel="noreferrer"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -60,15 +62,18 @@ export default function NavBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <button
-                onClick={() => navigate("/")}
+              <a
+                href="https://theuniquecoder.hashnode.dev/coding-machine-a-online-editor-to-write-programs-and-to-run-it-part-1"
+                target="_blank"
+                rel="noreferrer"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >
                 {"View Docs"}
-              </button>
+              </a>
 
               <a
-                href={"www.google.com"}
+                type="button"
+                href="https://github.com/Siddharth9890/coding-machine-frontend"
                 target="_blank"
                 rel="noreferrer"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
