@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function PageNotFound() {
+  const navigate = useNavigate();
   return (
     <div className="bg-white min-h-screen flex flex-col lg:relative">
       <div className="flex-grow flex flex-col">
@@ -16,12 +19,12 @@ export default function PageNotFound() {
                 Sorry, we couldn’t find the page you’re looking for.
               </p>
               <div className="mt-6">
-                <a
-                  href="/"
+                <button
+                  onClick={() => navigate("/")}
                   className="text-base font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Go back home<span aria-hidden="true"> &rarr;</span>
-                </a>
+                </button>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
+import axios from "axios";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-python";
@@ -14,26 +15,35 @@ import "ace-builds/src-noconflict/theme-xcode";
 
 import Settings from "./Settings";
 import changeInitialLanguage from "../utils/languageSelector";
-import axios from "axios";
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
 function CodeEditor() {
+
   const languages = ["c++", "java", "python"];
+
   const themes = ["monokai", "dracula", "github", "terminal", "xcode"];
+
   const fontSizes = ["14", "18", "20", "22"];
+
   const tabSizes = ["2", "4", "6", "8"];
 
   const [selectFontSize, setSelectFontSize] = useState(fontSizes[0]);
+
   const [selectTabSize, setSelectTabSize] = useState(tabSizes[0]);
 
   const [selectTheme, setSelectTheme] = useState(themes[0]);
+
   const [selectLanguage, setSelectLanguage] = useState(languages[1]);
 
   const [enableBasicAutoComplete, setEnableBasicAutoComplete] = useState(false);
+
   const [enableLiveAutoComplete, setEnableLiveAutoComplete] = useState(false);
 
   const [code, setCode] = useState(changeInitialLanguage(selectLanguage));
+
   const [open, setOpen] = useState(false);
 
   const [submitted, setSubmitted] = useState(false);
@@ -48,7 +58,7 @@ function CodeEditor() {
     setCode(changeInitialLanguage(selectLanguage));
   }, [selectLanguage]);
 
-  // to check status of code i.e processing or queued and then finally show output
+  // to check after .5 seconds the status of code i.e processing or queued and then finally show output
   async function checkStatusAndShowOutput() {
     try {
       const { data }: any = await axios.get(
@@ -119,11 +129,15 @@ function CodeEditor() {
     setCode(newValue);
   }
 
+  // to submit the code and start checking the status
   async function execute() {
     setSubmitted(true);
     setDisableRunCode(true);
     setReadOnly(true);
     try {
+      // *****IMP we are trying to hit the worker api because heroku sleeps the dyno after 30 mins 
+      // and hence the worker will not be started even thought we have submitted the code 
+      // hence a workaround to start the worker as well ****** 
       axios
         .get("https://coding-machine-worker.herokuapp.com/")
         .then(() => {})

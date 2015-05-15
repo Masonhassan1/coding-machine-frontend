@@ -48,6 +48,8 @@ export default function NavBar() {
                 <a
                   type="button"
                   href="https://github.com/Siddharth9890/coding-machine-frontend"
+                  target="_blank"
+                  rel="noreferrer"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
                   <CodeIcon className="h-6 w-6" aria-hidden="true" />
