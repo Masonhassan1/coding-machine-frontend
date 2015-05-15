@@ -64,6 +64,8 @@ function CodeEditor() {
           `https://coding-machine-api.herokuapp.com/result/${executionId}`
         );
         setOutput(data.data);
+        setCheckCodeStatus(false);
+
         setDisableRunCode(false);
         setReadOnly(false);
       }
