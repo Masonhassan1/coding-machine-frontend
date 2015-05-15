@@ -122,21 +122,25 @@ function CodeEditor() {
     setDisableRunCode(true);
     setReadOnly(true);
     try {
-      await axios.get("https://coding-machine-worker.herokuapp.com/");
-      const { data } = await axios.post(
-        "https://coding-machine-api.herokuapp.com/submit",
-        {
-          code,
-          language: selectLanguage,
-        }
-      );
-      if (data.status === "ok") {
-        setExecutionId(data.data);
-        setCheckCodeStatus(true);
-      } else {
-        setDisableRunCode(false);
-        setReadOnly(false);
-      }
+      axios
+        .get("https://coding-machine-worker.herokuapp.com/")
+        .then(() => {})
+        .catch(async () => {
+          const { data } = await axios.post(
+            "https://coding-machine-api.herokuapp.com/submit",
+            {
+              code,
+              language: selectLanguage,
+            }
+          );
+          if (data.status === "ok") {
+            setExecutionId(data.data);
+            setCheckCodeStatus(true);
+          } else {
+            setDisableRunCode(false);
+            setReadOnly(false);
+          }
+        });
     } catch (error) {
       setSubmitted(false);
       setDisableRunCode(false);
