@@ -129,6 +129,7 @@ function CodeEditor() {
           language: selectLanguage,
         }
       );
+      await axios.get("https://coding-machine-worker.herokuapp.com/");
       if (data.status === "ok") {
         setExecutionId(data.data);
         setCheckCodeStatus(true);
