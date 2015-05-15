@@ -52,7 +52,7 @@ function CodeEditor() {
   async function checkStatusAndShowOutput() {
     try {
       const { data }: any = await axios.get(
-        `http://localhost:5000/check-status/${executionId}`
+        `https://coding-machine-api.herokuapp.com/check-status/${executionId}`
       );
       if (data.data !== "completed") {
         setTimeout(() => {
@@ -61,7 +61,7 @@ function CodeEditor() {
         }, 500);
       } else {
         const { data } = await axios.get(
-          `http://localhost:5000/result/${executionId}`
+          `https://coding-machine-api.herokuapp.com/result/${executionId}`
         );
         setOutput(data.data);
       }
@@ -120,7 +120,7 @@ function CodeEditor() {
     setDisableRunCode(true);
     setReadOnly(true);
     try {
-      const { data } = await axios.post("http://localhost:5000/submit", {
+      const { data } = await axios.post("https://coding-machine-api.herokuapp.com/submit", {
         code,
         language: selectLanguage,
       });
