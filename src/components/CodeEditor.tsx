@@ -63,7 +63,6 @@ function CodeEditor() {
         const { data } = await axios.get(
           `https://coding-machine-api.herokuapp.com/result/${executionId}`
         );
-        console.log(data);
         setOutput(data.data);
         setDisableRunCode(false);
         setReadOnly(false);
