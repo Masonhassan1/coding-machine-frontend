@@ -64,6 +64,8 @@ function CodeEditor() {
           `https://coding-machine-api.herokuapp.com/result/${executionId}`
         );
         setOutput(data.data);
+        setDisableRunCode(false);
+        setReadOnly(false);
       }
     } catch (error) {
       setOutput("");
@@ -120,16 +122,20 @@ function CodeEditor() {
     setDisableRunCode(true);
     setReadOnly(true);
     try {
-      const { data } = await axios.post("https://coding-machine-api.herokuapp.com/submit", {
-        code,
-        language: selectLanguage,
-      });
+      const { data } = await axios.post(
+        "https://coding-machine-api.herokuapp.com/submit",
+        {
+          code,
+          language: selectLanguage,
+        }
+      );
       if (data.status === "ok") {
         setExecutionId(data.data);
         setCheckCodeStatus(true);
+      } else {
+        setDisableRunCode(false);
+        setReadOnly(false);
       }
-      setDisableRunCode(false);
-      setReadOnly(false);
     } catch (error) {
       setSubmitted(false);
       setDisableRunCode(false);
